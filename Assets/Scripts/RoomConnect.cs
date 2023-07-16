@@ -1,19 +1,17 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using IngameDebugConsole;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
-using Unity.Networking.Transport.Relay;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RoomConnect : MonoBehaviour
 {
@@ -26,9 +24,9 @@ public class RoomConnect : MonoBehaviour
     private float lobbyUpdateTimerMax = 1.1f;
     
     //TODO: player name
-    private static string playerName;
+    public static string playerName;
 
-    private bool relayJoined = false;
+    private static bool _relayJoined = false;
 
     private void Update()
     {
@@ -68,9 +66,9 @@ public class RoomConnect : MonoBehaviour
                 Lobby lobby = await LobbyService.Instance.GetLobbyAsync(joinedLobby.Id);
                 joinedLobby = lobby;
 
-                if (joinedLobby.Data["StartGame"].Value != "0" && !relayJoined)
+                if (joinedLobby.Data["StartGame"].Value != "0" && !_relayJoined)
                 {
-                    relayJoined = true;
+                    _relayJoined = true;
                     JoinRelay(joinedLobby.Data["StartGame"].Value);
                 }
             }
@@ -78,13 +76,15 @@ public class RoomConnect : MonoBehaviour
     }
 
     [ConsoleMethod("Authenticate", "Authenticates player by playerName")]
-    public static async void Authenticate(string newPlayerName)
+    public static async Task Authenticate(string newPlayerName)
     {
+        await UnityServices.InitializeAsync();
+        if (AuthenticationService.Instance.IsExpired || AuthenticationService.Instance.IsSignedIn)
+            return;
         InitializationOptions initializationOptions = new InitializationOptions();
         initializationOptions.SetProfile(newPlayerName);
         playerName = newPlayerName;
-        await UnityServices.InitializeAsync();
-        
+
         AuthenticationService.Instance.SignedIn += () =>
         {
             Debug.Log("Signed in" + AuthenticationService.Instance.PlayerId);
@@ -94,8 +94,7 @@ public class RoomConnect : MonoBehaviour
 
     private async void Start()
     {
-
-
+    DontDestroyOnLoad(gameObject);
     }
 
 
@@ -104,6 +103,7 @@ public class RoomConnect : MonoBehaviour
     {
         try
         {
+            Debug.Log("Creating Relay");
             Allocation allocation = await RelayService.Instance.CreateAllocationAsync(3);
 
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
@@ -115,7 +115,12 @@ public class RoomConnect : MonoBehaviour
                 allocation.Key,
                 allocation.ConnectionData);
 
-            NetworkManager.Singleton.StartHost();
+            _relayJoined = true;
+            SceneManager.sceneLoaded += (scene, mode) =>
+            {
+                NetworkManager.Singleton.StartHost();
+            };
+            SceneManager.LoadSceneAsync("Game");
             return joinCode;
         }
         catch (RelayServiceException e)
@@ -141,7 +146,11 @@ public class RoomConnect : MonoBehaviour
                 joinAllocation.ConnectionData,
                 joinAllocation.HostConnectionData);
 
-            NetworkManager.Singleton.StartClient();
+            SceneManager.sceneLoaded += (scene, mode) =>
+            {
+                NetworkManager.Singleton.StartClient();
+            };
+            SceneManager.LoadSceneAsync("Game");
         }
         catch (RelayServiceException e)
         {
@@ -167,7 +176,7 @@ public class RoomConnect : MonoBehaviour
         {
             int maxPlayers = 4;
             CreateLobbyOptions createLobbyOptions = new CreateLobbyOptions {
-                IsPrivate = true,
+                IsPrivate = false,
                 Player = GetPlayer(),
                 Data = new Dictionary<string, DataObject>
                 {
@@ -185,6 +194,9 @@ public class RoomConnect : MonoBehaviour
                                                     + " | Max players: " + lobby.MaxPlayers
                                                     + " | Lobby Id: " + lobby.Id
                                                     + " | Lobby Code: " + lobby.LobbyCode);
+
+            StartGame();
+            
             PrintPlayers(hostLobby);
         }
         catch (LobbyServiceException e)
@@ -203,6 +215,7 @@ public class RoomConnect : MonoBehaviour
             Debug.Log("Lobbies found: " + queryResponse.Results.Count);
             foreach (Lobby lobby in queryResponse.Results)
             {
+                
                 Debug.Log(lobby.Name + " " + lobby.MaxPlayers);
             }
         }
@@ -212,19 +225,52 @@ public class RoomConnect : MonoBehaviour
         }
     }
 
-    [ConsoleMethod("JoinLobbyByCode", "Joins a lobby through code")]
-    public static async void JoinLobbyByCode(string lobbyCode)
+    [ConsoleMethod("JoinLobbyById", "Joins a lobby through id")]
+    public static async void JoinLobbyById(string lobbyId)
     {
         try
         {
-            JoinLobbyByCodeOptions joinLobbyByCodeOptions = new JoinLobbyByCodeOptions
+            JoinLobbyByIdOptions joinLobbyByCodeOptions = new JoinLobbyByIdOptions
             {
                 Player = GetPlayer()
             };
-            Lobby lobby = await Lobbies.Instance.JoinLobbyByCodeAsync(lobbyCode, joinLobbyByCodeOptions);
+            Lobby lobby = await Lobbies.Instance.JoinLobbyByIdAsync(lobbyId, joinLobbyByCodeOptions);
             joinedLobby = lobby;
-            Debug.Log("Joined Lobby with code. LobbyCode: " + lobbyCode);
+            Debug.Log("Joined Lobby with id. LobbyId: " + lobbyId);
             PrintPlayers(lobby);
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.Log(e);
+        }
+    }
+    
+    [ConsoleMethod("JoinLobbyByName", "Joins a lobby through lobby name")]
+    public static async void JoinLobbyByName(string lobbyName)
+    {
+        try
+        {
+            QueryResponse queryResponse = await Lobbies.Instance.QueryLobbiesAsync();
+            Debug.Log("Joining by name... Lobbies found: " + queryResponse.Results.Count);
+            string lobbyId = null;
+            foreach (Lobby lobby in queryResponse.Results)
+            {
+                if (lobby.Name == lobbyName)
+                {
+                    lobbyId = lobby.Id;
+                    break;
+                }
+                    
+            }
+
+            if (lobbyId != null)
+            {
+                JoinLobbyById(lobbyId);
+            }
+            else
+            {
+                Debug.LogWarning("lobby with this name not found!");
+            }
         }
         catch (LobbyServiceException e)
         {
@@ -264,6 +310,7 @@ public class RoomConnect : MonoBehaviour
     [ConsoleMethod("StartGame", "Start the game")]
     public static async void StartGame()
     {
+        //TODO: StartGame on 2 players
         try
         {
             if (hostLobby != null)
@@ -271,7 +318,7 @@ public class RoomConnect : MonoBehaviour
                 Debug.Log("StartGame");
 
                 string relayCode = await CreateRelay();
-
+                _relayJoined = true;
                 Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
                 {
                     Data = new Dictionary<string, DataObject>

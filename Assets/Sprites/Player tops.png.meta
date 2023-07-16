@@ -1,0 +1,609 @@
+fileFormatVersion: 2
+guid: fcdbbdfd5bcecac4887336a58a34ed30
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 50
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: player_idle_red
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 353
+        width: 98
+        height: 190
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f05b70a1cefd08a4cbf8bd5297f8328e
+      internalID: -128973398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_idle_green
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 352
+        width: 98
+        height: 191
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f240034a7583c934cb278b5b6a943308
+      internalID: -657172194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_idle_orange
+      rect:
+        serializedVersion: 2
+        x: 637
+        y: 352
+        width: 98
+        height: 191
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74432d5abfa87434eb5d2d01ffd2f257
+      internalID: 776752057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_idle_yellow
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 351
+        width: 100
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90daccb6a55306c4ca4508dfde9d1a0f
+      internalID: 1785316078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_idle_blue
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 353
+        width: 97
+        height: 190
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf6e3a39c24468f45aa78b753f6fd58a
+      internalID: 1921226866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_idle_purple
+      rect:
+        serializedVersion: 2
+        x: 1529
+        y: 352
+        width: 98
+        height: 191
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64e569413b6d25f429367495d7303b62
+      internalID: 150990194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_idle_grey
+      rect:
+        serializedVersion: 2
+        x: 1827
+        y: 352
+        width: 99
+        height: 191
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2845bf1ba38d04449ac65925410c84b2
+      internalID: 77788513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_idle_lightblue
+      rect:
+        serializedVersion: 2
+        x: 2124
+        y: 351
+        width: 98
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80ffabc5e5e37c94faa7aef0ea0f0e43
+      internalID: -2042340109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_shoot_green
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 40
+        width: 261
+        height: 206
+      alignment: 9
+      pivot: {x: 0.19767019, y: 0.53105783}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81f359144c42b0c4ba13705d24fce5b1
+      internalID: -622663175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_shoot_blue
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 39
+        width: 258
+        height: 208
+      alignment: 9
+      pivot: {x: 0.18588896, y: 0.54101235}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3e1e651c8c39654caabaefef275070c
+      internalID: -1796882835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_shoot_red
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 40
+        width: 259
+        height: 208
+      alignment: 9
+      pivot: {x: 0.1788673, y: 0.5307592}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 508bf5947dd480440b7eb4f36d516d26
+      internalID: 280389888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_shoot_orange
+      rect:
+        serializedVersion: 2
+        x: 637
+        y: 42
+        width: 258
+        height: 206
+      alignment: 9
+      pivot: {x: 0.18588872, y: 0.53105783}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29f0d3e2644975c468c581e4299efd70
+      internalID: -516722464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_shoot_yellow
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 40
+        width: 260
+        height: 208
+      alignment: 9
+      pivot: {x: 0.19650762, y: 0.54101235}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c094d594f5881c4fa9d5c70e8ce3a95
+      internalID: -492648628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_shoot_purple
+      rect:
+        serializedVersion: 2
+        x: 1529
+        y: 40
+        width: 260
+        height: 207
+      alignment: 9
+      pivot: {x: 0.1883052, y: 0.5309077}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe3f41eaedc4ae14f9548b824c04d8a8
+      internalID: -2091628726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_shoot_grey
+      rect:
+        serializedVersion: 2
+        x: 1828
+        y: 40
+        width: 257
+        height: 206
+      alignment: 9
+      pivot: {x: 0.18466626, y: 0.53105783}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40dfc8d347cd2ba4fa56b00857613a47
+      internalID: 1313670102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_shoot_lightblue
+      rect:
+        serializedVersion: 2
+        x: 2123
+        y: 40
+        width: 261
+        height: 209
+      alignment: 9
+      pivot: {x: 0.18949896, y: 0.52040786}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 511c2e297874f964c9d80810e7dd9b9a
+      internalID: 729195492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Player tops_108: 1776342857
+      Player tops_117: -1168598196
+      Player tops_105: -875100486
+      Player tops_120: -1895631779
+      Player tops_38: 1678730171
+      Player tops_4: -2124511937
+      Player tops_41: 1838478473
+      player_idle_purple: 150990194
+      Player tops_123: -824053039
+      Player tops_93: 303382043
+      player_shoot_green: -622663175
+      Player tops_61: 1086548453
+      Player tops_33: -1928740368
+      Player tops_116: 268980517
+      Player tops_22: -1653138926
+      Player tops_17: 577242915
+      Player tops_103: -1658560089
+      Player tops_102: 1734052308
+      Player tops_81: -1885865478
+      Player tops_30: 1797665587
+      Player tops_92: -1727537865
+      Player tops_113: -1155584884
+      Player tops_82: -663097282
+      Player tops_77: 1311802786
+      Player tops_119: 248032433
+      Player tops_25: 240303499
+      Player tops_39: 2118349278
+      Player tops_54: -981035270
+      Player tops_94: 1036511218
+      Player tops_112: 776342379
+      player_shoot_red: 280389888
+      Player tops_3: 437272943
+      Player tops_124: 490494371
+      Player tops_76: 99758248
+      Player tops_7: 893552054
+      Player tops_122: -2085834943
+      Player tops_44: -1222020859
+      Player tops_87: -682165235
+      Player tops_8: -787769585
+      player_idle_lightblue: -2042340109
+      Player tops_51: 1405531476
+      Player tops_106: 901989338
+      Player tops_58: -850098786
+      Player tops_53: -404742555
+      Player tops_107: 1745949850
+      Player tops_84: -499359880
+      Player tops_101: 2062758590
+      Player tops_114: 1057070689
+      Player tops_2: 531894889
+      Player tops_121: 1850291553
+      Player tops_42: -180621444
+      Player tops_19: -1792873300
+      Player tops_56: 1176544232
+      Player tops_62: -653113214
+      Player tops_65: -1855009116
+      Player tops_9: 1606377632
+      player_idle_green: -657172194
+      Player tops_111: 50201068
+      Player tops_31: 1277379943
+      Player tops_13: 1717937691
+      player_shoot_grey: 1313670102
+      Player tops_68: 1932314465
+      Player tops_79: 1194243185
+      player_shoot_lightblue: 729195492
+      Player tops_49: -668151850
+      Player tops_64: -963035963
+      Player tops_1: 806935139
+      player_idle_blue: 1921226866
+      Player tops_118: -1974800175
+      Player tops_55: -965695190
+      Player tops_43: 135979146
+      player_shoot_yellow: -492648628
+      Player tops_83: 1636107369
+      Player tops_36: -105123140
+      Player tops_78: 790539761
+      Player tops_5: -245300101
+      Player tops_10: 949981977
+      Player tops_88: 1373673935
+      player_idle_grey: 77788513
+      Player tops_100: -1096715066
+      Player tops_34: 742912974
+      player_idle_red: -128973398
+      Player tops_47: 1351620940
+      Player tops_104: -2008305366
+      Player tops_15: 140542639
+      Player tops_52: -1119323355
+      Player tops_99: -2146324138
+      Player tops_97: -1100281202
+      Player tops_91: 533883021
+      Player tops_37: -1797390889
+      Player tops_86: -1681040812
+      Player tops_60: -1053936039
+      Player tops_46: 517350061
+      Player tops_48: -1341915852
+      Player tops_6: 1521001827
+      Player tops_80: 1901690040
+      Player tops_96: -2116976365
+      Player tops_59: -57168625
+      Player tops_50: 953267662
+      player_idle_orange: 776752057
+      Player tops_90: -1975655683
+      Player tops_57: -1569837552
+      player_shoot_blue: -1796882835
+      Player tops_98: 1070621555
+      Player tops_14: 95033893
+      player_shoot_orange: -516722464
+      Player tops_63: 211287460
+      Player tops_95: 1520027311
+      Player tops_27: -423318800
+      Player tops_28: -879283243
+      Player tops_115: -933542090
+      player_shoot_purple: -2091628726
+      Player tops_89: -867676164
+      Player tops_109: 1541005777
+      Player tops_74: 1036286713
+      Player tops_110: 469988250
+      Player tops_20: 729410009
+      Player tops_45: -1647443621
+      player_idle_yellow: 1785316078
+      Player tops_40: -938853921
+      Player tops_125: -1491218448
+      Player tops_85: -1752673987
+      Player tops_0: 1734604863
+      Player tops_11: 111271233
+      Player tops_12: -54993121
+      Player tops_23: -902651618
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
