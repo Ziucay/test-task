@@ -118,6 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idleSprite: {fileID: 1921226866, guid: fcdbbdfd5bcecac4887336a58a34ed30, type: 3}
   shootingSprite: {fileID: -1796882835, guid: fcdbbdfd5bcecac4887336a58a34ed30, type: 3}
+  projectile: {fileID: 2215553066795593043, guid: d1041fd1d415b4747a7bcc9ace42a5fc, type: 3}
   speed: 10
   coins: {fileID: 0}
   healthbar: {fileID: 0}

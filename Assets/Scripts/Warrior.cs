@@ -1,10 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
+using Unity.Mathematics;
 using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -13,6 +10,7 @@ public class Warrior : NetworkBehaviour
 {
     [SerializeField] private Sprite idleSprite;
     [SerializeField] private Sprite shootingSprite;
+    [SerializeField] private GameObject projectile;
     [SerializeField] private float speed;
     [SerializeField] private TextMeshProUGUI coins;
     [SerializeField] private Slider healthbar;
@@ -33,10 +31,12 @@ public class Warrior : NetworkBehaviour
         set
         {
             _coins = value;
-            coins.text = "Coins: " + _coins;
+            if (IsOwner)
+                coins.text = "Coins: " + _coins;
         }
     }
-    
+
+    private bool _isDead = false;
     private int _health = 100;
     
     public int Health
@@ -45,20 +45,41 @@ public class Warrior : NetworkBehaviour
         private set
         {
             _health = value;
-            healthbar.value = _health;
+            if (IsOwner)
+            {
+                healthbar.value = _health;
+                if (_health <= 0)
+                {
+                    healthbar.gameObject.SetActive(false);
+                    coins.gameObject.SetActive(false);
+                    _isDead = true;
+                    //TODO: death sequence
+                }
+            }
+                
+            
+            
         }
+    }
+
+    [ServerRpc]
+    private void DespawnServerRpc()
+    {
+        gameObject.GetComponent<NetworkObject>().Despawn(true);
     }
 
     public override void OnNetworkSpawn()
     {
-        Debug.Log("I spawned! I am a " + (IsHost ? "Host" : "Client"));
         _rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         movement.Enable();
         attack.Enable();
         
         canAttack = true;
-        base.OnNetworkSpawn();
+        //TODO: init coins
+        coins = GameObject.Find("Coins").GetComponent<TextMeshProUGUI>();
+        healthbar = GameObject.Find("HealthBar").GetComponent<Slider>();
+        Debug.Log("I spawned! I am a " + (IsHost ? "Host" : "Client"));
     }
 
     public override void OnNetworkDespawn()
@@ -75,23 +96,13 @@ public class Warrior : NetworkBehaviour
         if (!(Mathf.Approximately(movementVector.x, 0f) && Mathf.Approximately(movementVector.y, 0f)))
             Movement(movementVector);
         
-        //if (attack.WasPressedThisFrame() && canAttack)
-        //    Shoot();
+        if (attack.WasPressedThisFrame() && canAttack)
+            Shoot();
     }
 
     private void Movement(Vector2 moveVector)
     {
         MovementServerRpc(moveVector.x, moveVector.y, OwnerClientId);
-    }
-
-    private async void Shoot()
-    {
-        Debug.Log("Shoot");
-        canAttack = false;
-        _spriteRenderer.sprite = shootingSprite;
-        await Task.Delay(500);
-        _spriteRenderer.sprite = idleSprite;
-        canAttack = true;
     }
 
     [ServerRpc]
@@ -112,6 +123,72 @@ public class Warrior : NetworkBehaviour
         {
             float degrees = Mathf.Rad2Deg * Mathf.Atan2(moveVector.y,moveVector.x);
             transform.rotation = Quaternion.AngleAxis(degrees, Vector3.forward);
+        }
+    }
+    
+    private async void Shoot()
+    {
+        Debug.Log("Shoot");
+        canAttack = false;
+        _spriteRenderer.sprite = shootingSprite;
+        CreateProjectileServerRpc(OwnerClientId, new ServerRpcParams());
+        await Task.Delay(500);
+        _spriteRenderer.sprite = idleSprite;
+        canAttack = true;
+    }
+
+    [ServerRpc]
+    private void CreateProjectileServerRpc(ulong ownerClientId, ServerRpcParams rpcParams)
+    {
+        GameObject obj = Instantiate(projectile, gameObject.transform.position, quaternion.identity);
+            
+        obj.GetComponent<NetworkObject>().Spawn(true);
+        obj.GetComponent<Projectile>().realOwner = rpcParams.Receive.SenderClientId;
+        obj.GetComponent<Projectile>().ShootClientRpc(transform.right);
+        //CreateProjectileClientRpc(ownerClientId);
+    }
+
+    /*
+     [ClientRpc]
+    private void CreateProjectileClientRpc(ulong ownerClientId)
+    {
+        if (ownerClientId == OwnerClientId)
+        {
+            GameObject obj = Instantiate(projectile, gameObject.transform.position, quaternion.identity);
+            
+            obj.GetComponent<NetworkObject>().Spawn(true);
+            
+        }
+    }
+     */
+
+    [ServerRpc(RequireOwnership = false)]
+    public void AddCoinServerRpc(ulong ownerClientId)
+    {
+        AddCoinClientRpc(ownerClientId);
+    }
+
+    [ClientRpc]
+    private void AddCoinClientRpc(ulong ownerClientId)
+    {
+        if (ownerClientId == OwnerClientId)
+        {
+            Coins += 1;
+        }
+    }
+    
+    [ServerRpc(RequireOwnership = false)]
+    public void DecreaseHealthServerRpc(ulong ownerClientId)
+    {
+        DecreaseHealthClientRpc(ownerClientId);
+    }
+
+    [ClientRpc]
+    private void DecreaseHealthClientRpc(ulong ownerClientId)
+    {
+        if (ownerClientId == OwnerClientId)
+        {
+            Health -= 10;
         }
     }
     
