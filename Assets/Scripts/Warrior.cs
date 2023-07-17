@@ -8,8 +8,8 @@ using UnityEngine.UI;
 
 public class Warrior : NetworkBehaviour
 {
-    [SerializeField] private Sprite idleSprite;
-    [SerializeField] private Sprite shootingSprite;
+    public Sprite idleSprite;
+    public Sprite shootingSprite;
     [SerializeField] private GameObject projectile;
     [SerializeField] private float speed;
     [SerializeField] private TextMeshProUGUI coins;
