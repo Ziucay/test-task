@@ -8,14 +8,16 @@ public class CustomSpawningHandler : NetworkBehaviour
     [SerializeField] private Sprite[] idleSprites;
     [SerializeField] private Sprite[] shootingSprites;
 
-    private int objectsSpawned = 0;
+    private static int objectsSpawned = 0;
 
     public override void OnNetworkSpawn()
     {
+        if (!IsOwner) return;
+        
         RequestPlayerSpawnServerRpc(OwnerClientId);
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void RequestPlayerSpawnServerRpc(ulong ownerClientId)
     {
         Debug.Log("Custom player spawn");
